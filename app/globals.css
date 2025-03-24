@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --font-kufam: "Kufam", sans-serif;
+
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -86,4 +88,8 @@
   .black-gradient {
     background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
   }
+}
+
+body {
+  font-family: var(--font-kufam);
 }

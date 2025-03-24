@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Kufam } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
 
@@ -15,6 +16,12 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const kufam = Kufam({
+  variable: "--font-kufam",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Mustafa Hasanain's Portfolio",
   description: "Building high-performance Web Applications with modern Web Technologies",
@@ -24,8 +31,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={kufam.variable}>
+      <head />
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

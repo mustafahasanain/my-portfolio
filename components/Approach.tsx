@@ -7,15 +7,13 @@ const Approach = () => {
   return (
     <section className="w-full py-20">
       <h1 className="heading">
-        My <span className="text-purple">Approach</span>
+        How I <span className="text-purple">Approach</span> Projects
       </h1>
       <div className="my-20 flex flex-col lg:flex-row items-center justify-center w-full gap-4">
         <Card
           title="Planning & Strategy"
           icon={<AceternityIcon order="Phase 1" />}
-          desciption="We'll collaborate to map out your website's goals, target audience, 
-          and key functionalities. We'll discuss things like site structure, 
-          navigation, and content requirements."
+          desciption="I collaborate closely with clients to define website goals, target audiences, and key functionalities. We’ll also outline site structure, navigation, and content requirements, ensuring a solid foundation for the project."
         >
           <CanvasRevealEffect
             animationSpeed={5.1}
@@ -25,9 +23,7 @@ const Approach = () => {
         <Card
           title="Development & Progress Update"
           icon={<AceternityIcon order="Phase 2" />}
-          desciption="Once we agree on the plan, I cue my lofi playlist and dive into
-          coding. From initial sketches to polished code, I keep you updated
-          every step of the way."
+          desciption="Once the plan is finalized, I begin the development process, focusing on clean and efficient code. From initial concepts to a fully functional product, I provide regular updates to keep you informed every step of the way."
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -42,9 +38,7 @@ const Approach = () => {
         <Card
           title="Development & Launch"
           icon={<AceternityIcon order="Phase 3" />}
-          desciption="This is where the magic happens! Based on the approved design, 
-          I'll translate everything into functional code, building your website
-          from the ground up."
+          desciption="This is where the work comes to life! Following the approved design, I’ll convert everything into functional code, building your website from the ground up to ensure seamless performance and user experience."
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -56,6 +50,8 @@ const Approach = () => {
   </section>
   );
 }
+
+export default Approach;
 
 const Card = ({
   title,
@@ -140,6 +136,15 @@ const AceternityIcon = ({ order }: { order: string }) => {
           {order}
         </span>
       </button>
+
+{/* <button className="relative inline-flex overflow-hidden rounded-full p-[1px] ">
+  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+    {order}
+  </span>
+</button> */}
+
+
     </div>
   );
 };
@@ -160,4 +165,3 @@ export const Icon = ({ className, ...rest }: any) => {
   );
 };
 
-export default Approach;
