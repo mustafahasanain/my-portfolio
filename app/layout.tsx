@@ -24,7 +24,7 @@ const kufam = Kufam({
 
 export const metadata: Metadata = {
   title: "Mustafa Hasanain's Portfolio",
-  description: "Building high-performance Web Applications with modern Web Technologies",
+  description: "High performance Web Apps with Seamless User Experiences",
 };
 
 export default function RootLayout({
@@ -32,7 +32,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className={kufam.variable}>
-      <head />
+      <head>
+        {/* Add Favicon */}
+        <link rel="icon" href="/draft5.png" sizes="any" />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"

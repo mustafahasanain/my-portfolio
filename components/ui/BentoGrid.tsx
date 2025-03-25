@@ -57,7 +57,10 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+        "relative overflow-hidden rounded-3xl border border-white/[0.1]",
+        "group/bento hover:shadow-xl transition duration-200",
+        "shadow-input dark:shadow-none",
+        "md:min-h-0 min-h-[175px]", // Only add minimum height for mobile
         className
       )}
       style={{
@@ -72,7 +75,10 @@ export const BentoGridItem = ({
               <img
                 src={img}
                 alt={img}
-                className={cn(imgClassName, "object-cover object-center")}
+                className={cn(
+                  imgClassName, 
+                  "object-cover object-center"
+                )}
               />
             )}
           </div>
@@ -113,7 +119,7 @@ export const BentoGridItem = ({
           {id === 2 && <GlobeDemo />}
 
           {id === 3 && (
-            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
+            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2 mt-20">
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
                 {['JavaScript', 'TypeScript', 'Express'].map((item) => (
                   <span
@@ -168,11 +174,8 @@ export const BentoGridItem = ({
               />
             </div>
           )}
-          {/* end of third big div */}
         </div>
-        {/* end of second big div */}
       </div>
-      {/* end of big div */}
     </div>
   );
 };

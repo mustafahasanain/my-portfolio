@@ -30,7 +30,7 @@ const Hero = () => {
                 {/* <h2 className='uppercase tracking-widest text-xs text-center text-blue-100 max-w-80'>Dynamic Web Magic with Next.JS</h2> */}
                 <TextGenerateEffect
                     className="text-center text-[40px] md:text-5xl lg:text-6xl "
-                    words="High-performance Web Apps with Seamless User Experiences"
+                    words="High performance Web Apps with Seamless User Experiences"
                 />
                 <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl pt-10">
                     Hi! I&apos;m Mustafa, a Web Developer based in Iraq.
