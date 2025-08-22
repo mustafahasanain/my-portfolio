@@ -156,8 +156,8 @@ export const workExperience = [
   },
   {
     id: 3,
-    title: "UI/UX Designe",
-    desc: "Created user interfaces and branding materials with Figma, Photoshop, and Illustrator, ensuring visually engaging, user-friendly designs.",
+    title: "Graphic Design",
+    desc: "Created branding materials, marketing assets, and digital graphics using Photoshop, Illustrator, Figma, and Canva, delivering visually engaging and cohesive designs tailored to client needs.",
     className: "md:col-span-2",
     thumbnail: "/exp3.svg",
   },

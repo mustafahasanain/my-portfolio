@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -100,7 +100,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-                z: 0,
               }}
               transition={{
                 duration: 6,
@@ -119,7 +118,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-                z: 0,
               }}
               transition={{
                 duration: 6,
@@ -138,7 +136,6 @@ export const PinPerspective = ({
               animate={{
                 opacity: [0, 1, 0.5, 0],
                 scale: 1,
-                z: 0,
               }}
               transition={{
                 duration: 6,
