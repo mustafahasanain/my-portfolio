@@ -3,9 +3,11 @@
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
 import { GlobeDemo } from "./GridGlobe";
-import Lottie from "react-lottie";
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import animationData from "@/data/confetti.json";
+
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+const animationData = () => import("@/data/confetti.json");
 import { IoCopyOutline } from "react-icons/io5";
 import MagicButton from "./MagicButton";
 
@@ -48,10 +50,17 @@ export const BentoGridItem = ({
   spareImg?: string;
 }) => {
   const [copied, setCopied] = useState(false);
+  const [lottieData, setLottieData] = useState<any>(null);
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     navigator.clipboard.writeText("contact@mustafahasanain.com");
     setCopied(true);
+    
+    // Only load animation data when copied
+    if (!lottieData) {
+      const data = await animationData();
+      setLottieData(data.default || data);
+    }
   };
 
   return (
@@ -75,6 +84,7 @@ export const BentoGridItem = ({
             <img
               src={img}
               alt={img}
+              loading="lazy"
               className={cn(imgClassName, "object-cover object-center")}
             />
           )}
@@ -89,6 +99,7 @@ export const BentoGridItem = ({
             <img
               src={spareImg}
               alt={spareImg}
+              loading="lazy"
               className="object-cover object-center w-full h-full"
             />
           )}
@@ -151,16 +162,18 @@ export const BentoGridItem = ({
                   copied ? "block" : "block"
                 }`}
               >
-                <Lottie
-                  options={{
-                    loop: copied,
-                    autoplay: copied,
-                    animationData: animationData,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
-                  }}
-                />
+                {lottieData && (
+                  <Lottie
+                    options={{
+                      loop: copied,
+                      autoplay: copied,
+                      animationData: lottieData,
+                      rendererSettings: {
+                        preserveAspectRatio: "xMidYMid slice",
+                      },
+                    }}
+                  />
+                )}
               </div>
 
               <MagicButton

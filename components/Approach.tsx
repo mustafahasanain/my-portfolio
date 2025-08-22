@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CanvasRevealEffect } from "@/components/ui/CanvasRevealEffect";
+import dynamic from "next/dynamic";
+
+const CanvasRevealEffect = dynamic(() => import("@/components/ui/CanvasRevealEffect").then(mod => mod.CanvasRevealEffect), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-gradient-to-br from-purple-900/20 to-blue-900/20 rounded-3xl" />
+});
 
 const Approach = () => {
   return (
@@ -65,8 +70,29 @@ const Card = ({
   desciption: string;
 }) => {
   const [hovered, setHovered] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const cardRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <div
+      ref={cardRef}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="border border-black/[0.2] group/canvas-card flex items-center justify-center
@@ -83,7 +109,7 @@ const Card = ({
       <Icon className="absolute h-10 w-10 -bottom-3 -right-3 dark:text-white text-black opacity-30" />
 
       <AnimatePresence>
-        {hovered && (
+        {hovered && isVisible && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

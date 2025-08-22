@@ -17,6 +17,7 @@ export const TextGenerateEffect = ({
   const [scope, animate] = useAnimate();
   let wordsArray = words.split(" ");
   useEffect(() => {
+    // Reduce animation complexity for better performance
     animate(
       "span",
       {
@@ -24,8 +25,8 @@ export const TextGenerateEffect = ({
         filter: filter ? "blur(0px)" : "none",
       },
       {
-        duration: duration ? duration : 1,
-        delay: stagger(0.2),
+        duration: duration ? duration : 0.3,
+        delay: stagger(0.1),
       }
     );
   }, [scope.current]);

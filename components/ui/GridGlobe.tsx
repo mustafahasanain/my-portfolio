@@ -1,13 +1,30 @@
 "use client";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
-import dynamic from "next/dynamic";
-
-const World = dynamic(() => import("./Globe").then((m) => m.World), {
-  ssr: false,
-});
+import { LazyGlobe } from "./GlobeLazy";
 
 export function GlobeDemo() {
+  const [isVisible, setIsVisible] = useState(false);
+  const globeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (globeRef.current) {
+      observer.observe(globeRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const globeConfig = {
     pointSize: 4,
     globeColor: "#062056",
@@ -395,11 +412,17 @@ export function GlobeDemo() {
   ];
 
   return (
-    <div className="flex items-center justify-center absolute -left-5 top-36 md:top-40 mt-10 sm:mt-0 w-full h-full">
+    <div ref={globeRef} className="flex items-center justify-center absolute -left-5 top-36 md:top-40 mt-10 sm:mt-0 w-full h-full">
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-96 px-4">
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
         <div className="absolute w-full h-72 md:h-full z-10">
-          <World data={sampleArcs} globeConfig={globeConfig} />
+          {isVisible ? (
+            <LazyGlobe data={sampleArcs} globeConfig={globeConfig} />
+          ) : (
+            <div className="flex items-center justify-center w-full h-full bg-gradient-to-b from-transparent to-neutral-900/20 rounded-lg">
+              <div className="w-8 h-8 border-2 border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>

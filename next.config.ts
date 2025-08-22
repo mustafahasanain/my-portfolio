@@ -7,6 +7,44 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    unoptimized: true,
+    formats: ['image/webp', 'image/avif'],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+  webpack: (config, { isServer }) => {
+    // Optimize bundle splitting
+    if (!isServer) {
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        chunks: 'all',
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          three: {
+            name: 'three',
+            test: /[\\/]node_modules[\\/](three|@react-three)[\\/]/,
+            chunks: 'all',
+            priority: 30,
+          },
+          motion: {
+            name: 'motion',
+            test: /[\\/]node_modules[\\/](motion|framer-motion)[\\/]/,
+            chunks: 'all',
+            priority: 20,
+          },
+          vendor: {
+            name: 'vendor',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
+            priority: 10,
+          },
+        },
+      };
+    }
+    return config;
+  },
 };
 
 export default withSentryConfig(
